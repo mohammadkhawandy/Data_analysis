@@ -6,7 +6,7 @@ import joblib
 import numpy as np
 
 
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(file), ".."))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, BASE_DIR)
 
 from src.utils import preprocess, evaluate_model
