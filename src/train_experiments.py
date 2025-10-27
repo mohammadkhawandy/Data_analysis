@@ -26,8 +26,11 @@ def run_all(dataset_path, target_col):
     clf = RandomForestClassifier(n_estimators=100, random_state=42, n_jobs=-1)
 
     # ====================
+
     # Baseline Methods
+    
     # ====================
+
     print(" Running SelectKBest (k=10)...")
     res_selectk, _ = selectk_pipeline(clf, X.values, y, k=min(10, X.shape[1]), cv=5)
     print("SelectKBest:", res_selectk)
