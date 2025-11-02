@@ -1,4 +1,4 @@
-# 🧠 Feature Selection and Classification for Banking Dataset
+#  Feature Selection and Classification for Dataset
 
 This project aims to analyze a dataset by applying multiple **feature selection techniques** and comparing their performance in predicting customer subscription behavior. The system includes both **a Python backend** and an interactive **Streamlit application** for easy data analysis and visualization.
 
