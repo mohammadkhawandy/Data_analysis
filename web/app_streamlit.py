@@ -4,6 +4,7 @@ import streamlit as st
 import pandas as pd
 import joblib
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -93,7 +94,29 @@ if uploaded_file is not None:
                 
                 st.subheader(" مقارنة النتائج:")
                 st.write(pd.DataFrame.from_dict(results, orient="index", columns=["Accuracy"]))
+                st.subheader(" Accuracy Comparison")
+                fig, ax = plt.subplots()
+                ax.bar(results.keys(), [v * 100 for v in results.values()], color=["#4CAF50", "#2196F3", "#FF9800"])
+                ax.set_ylabel("Accuracy (%)")
+                ax.set_title("Comparison Between Feature Selection Methods")
+                st.pyplot(fig)
 
+                if hasattr(ga, "history_") and len(ga.history_) > 1:
+                    st.subheader(" GA Progress Over Generations")
+                    plt.figure()
+                    plt.plot(ga.history_, marker='o', color="#E91E63")
+                    plt.title("GA Evolution")
+                    plt.xlabel("Generation")
+                    plt.ylabel("Best Score")
+                    st.pyplot(plt)
+
+                selected = selected_mask.sum()
+                total = len(selected_mask)
+                st.subheader(" Selected Features Ratio")
+                fig2, ax2 = plt.subplots()
+                ax2.pie([selected, total - selected], labels=["Selected", "Not Selected"], autopct="%1.1f%%",
+                        colors=["#4CAF50", "#BDBDBD"])
+                st.pyplot(fig2)
                 joblib.dump(results, "results.joblib")
                 st.info("results.joblib تم حفظ النتائج في ")
 
